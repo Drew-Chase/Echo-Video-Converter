@@ -1,0 +1,118 @@
+﻿<Window x:Class="ChaseLabs.Echo.Video_Converter.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChaseLabs.Echo.Video_Converter.Windows"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Foreground="White"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
+        MouseDown="Window_MouseDown"
+        Title="Echo: Video Converter"
+        Height="490"
+        Width="865"
+        MinHeight="490"
+        MinWidth="865"
+        >
+
+    <!--Foreground="White"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"-->
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Border CornerRadius="10" Grid.RowSpan="3" Grid.ColumnSpan="2">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#7E59FF" Offset="0.0"/>
+                        <GradientStop Color="#FF2FCD" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
+            <Grid Background="Black" Opacity=".3" Grid.ColumnSpan="2" />
+            <Grid Background="Black" Opacity=".1" Grid.ColumnSpan="2" Grid.RowSpan="3" />
+
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" >
+
+                <Button Name="CloseBtn" HorizontalAlignment="Right" VerticalAlignment="Stretch" FontSize="25" Content="X" Width="35" Height="35" Margin="5" Click="CloseBtn_Click"  />
+                <Button x:Name="MinimizeBtn" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="35" Height="36" HorizontalAlignment="Right" Margin="0,-75,55,-27"  Click="MinimizeBtn_Click">
+                    <TextBlock Text="-" FontSize="45" VerticalAlignment="Top" Margin="0,-5" FontWeight="Light" />
+                </Button>
+            </StackPanel>
+
+            <StackPanel VerticalAlignment="Top" Margin="0,25,0,0" RenderTransformOrigin="0.501,1.308" Grid.Row="1">
+                <Image x:Name="Logo_Banner" Source="/Images/Echo Video Converter Banner.png" Height="195" Margin="60,0,60,0" />
+                <!--
+                <TextBlock Width="261" Height="55" TextWrapping="WrapWithOverflow" TextAlignment="Center" Text="Echo: Video Converter" FontWeight="Light" FontFamily="helvetica" FontSize="22" HorizontalAlignment="Center" Margin="98,40,74,0" />
+                -->
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="0">
+                <Grid Height="50">
+                    <TextBox x:Name="FileLocationTxb" IsEnabled="False" TextWrapping="NoWrap" FontFamily="helvetica" FontWeight="Light" Text="Source" FontSize="20" Foreground="White" Background="Transparent" BorderThickness="0" HorizontalContentAlignment="Center" Opacity="1" Margin="27,10,140,7" />
+                    <Button x:Name="OpenFolderBtn" Background="Transparent" VerticalAlignment="Top" BorderThickness="0"  Click="OpenFolderBtn_Click" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,2,79,0">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="25" Height="25" />
+                    </Button>
+                    <Button x:Name="SelectFileBtn" Background="Transparent" VerticalAlignment="Top" BorderThickness="0"  Click="SelectFileBtn_Click" HorizontalAlignment="Right" Width="40" Height="40" Margin="0,2,34,0">
+                        <iconPacks:PackIconMaterial Kind="File" Width="24" Height="24"  />
+                    </Button>
+                </Grid>
+
+                <Button x:Name="ProcessBtn" Content="Process" FontSize="25" Width="109" Height="36" Margin="0,25,0,0" Click="ProcessBtn_Click"/>
+
+                <Grid Margin="50" Height="50">
+                    <Button x:Name="SettingsBtn" Width="36" Height="36" Margin="45,7,252,7" HorizontalAlignment="Center" Click="SettingsBtn_Click">
+                        <iconPacks:PackIconMaterial Kind="Settings" />
+                    </Button>
+                    <Button x:Name="StopBtn" Width="36" Height="36" Margin="139,7,158,7" HorizontalAlignment="Center" Click="StopBtn_Click">
+                        <iconPacks:PackIconMaterial Kind="Stop" />
+                    </Button>
+
+                    <Button x:Name="SkipBtn" Width="36" Height="36" Margin="224,7,73,7" HorizontalAlignment="Center" Click="SkipBtn_Click">
+                        <iconPacks:PackIconMaterial Kind="SkipNext" />
+                    </Button>
+                </Grid>
+            </StackPanel>
+            <Grid Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <ScrollViewer Name="ConsoleOutputScrView" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,10,5,32" BorderThickness="0">
+                    <Grid Height="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Border CornerRadius="10" Grid.RowSpan="3" Grid.ColumnSpan="2" Opacity=".5">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#FFF" Offset="0"/>
+                                    <GradientStop Color="#FFDF00" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock x:Name="ConsoleOutputTxtBlk" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="0,0,0,0" Background="#9c9c9c" Foreground="White" Opacity="0.5" Width="Auto" Height="auto" FontSize="12" />
+                    </Grid>
+                </ScrollViewer>
+                <Grid VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                    <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="27">
+                        <TextBlock x:Name="CurrentSize_Txb" Text="Current Size: N/A" Width="198" />
+                        <TextBlock x:Name="OriginalSize_Txb" Text="Original Size: N/A" Width="198" />
+                    </DockPanel>
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </Grid>
+</Window>
