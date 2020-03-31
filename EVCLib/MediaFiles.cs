@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ChaseLabs.CLLogger;
+using System.Collections.Generic;
 
 namespace ChaseLabs.Echo.Video_Converter.Resources
 {
@@ -16,7 +17,7 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
 
     public class MediaFiles : List<MediaFile>
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
 
         public static string SortTypeToString(SortType value)
         {

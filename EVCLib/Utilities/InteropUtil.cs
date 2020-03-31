@@ -7,7 +7,6 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 {
     public static class InteropUtil
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
         [StructLayout(LayoutKind.Sequential)]
         public struct OpenFileName
         {

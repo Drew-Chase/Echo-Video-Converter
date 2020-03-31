@@ -5,8 +5,6 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 {
     public static class DialogBrowsingUtilities
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
-
         public static void Assume
         (
             bool condition,

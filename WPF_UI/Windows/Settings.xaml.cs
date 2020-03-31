@@ -1,6 +1,7 @@
-﻿using ChaseLabs.Echo.Video_Converter.Resources;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.CLLogger.Interfaces;
+using ChaseLabs.Echo.Video_Converter.Resources;
 using ChaseLabs.Echo.Video_Converter.Util;
-using ChaseLabs.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,17 +19,17 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
     /// </summary>
     public partial class Settings : Window
     {
-        static log4net.ILog log => LogHelper.GetLogger();
-        private readonly Video_Converter.Util.Utilities utilities;
+        public ILog log => LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        private readonly Util.Utilities utilities;
         private readonly ConfigUtilities configUtilities;
         private readonly Values reference;
         private List<Button> navButtons;
 
-        public Settings(Values _ref)
+        public Settings()
         {
             InitializeComponent();
-            reference = _ref;
-            utilities = Video_Converter.Util.Utilities.Singleton;
+            reference = Values.Singleton;
+            utilities = Util.Utilities.Singleton;
             configUtilities = ConfigUtilities.Singleton;
             onStartUp();
         }

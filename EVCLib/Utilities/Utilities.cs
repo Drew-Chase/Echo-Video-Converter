@@ -1,4 +1,5 @@
-﻿using ChaseLabs.Echo.Video_Converter.Resources;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.Echo.Video_Converter.Resources;
 using System.Diagnostics;
 using System.IO;
 
@@ -6,7 +7,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 {
     public class Utilities
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
         private static Utilities _singleton;
         public static Utilities Singleton
         {

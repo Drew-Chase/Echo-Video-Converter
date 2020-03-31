@@ -1,4 +1,5 @@
-﻿using ChaseLabs.Echo.Video_Converter.Util;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.Echo.Video_Converter.Util;
 using System;
 using System.IO;
 using System.Windows.Controls;
@@ -7,7 +8,6 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
 {
     public class Values
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
         private static Values _singleton;
         public static Values Singleton
         {
@@ -22,12 +22,18 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
             }
         }
 
+        //public LogManger Log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
         public static string[] MediaExtensions => new string[] { "done", "mpegg", "mpeg", "mp4", "mkv", "m4a", "m4v", "f4v", "f4a", "m4b", "m4r", "f4b", "mov", "3gp", "3gp2", "3g2", "3gpp", "3gpp2", "ogg", "oga", "ogv", "ogx", "wmv", "wma", "flv", "avi" };
 
 
         protected Values()
         {
         }
+
+        public string CompanyName => "Chase Labs";
+        public string ApplicationName => "Echo Video Converter";
+        public string ProductLine => "Echo";
+
 
         public string CurrentSizeString { get; set; }
         public string OriginalSizeString { get; set; }
@@ -111,7 +117,7 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
             get => rootlocation;
             set
             {
-                string dir = Path.Combine(value, "Chase Labs", "Echo Video Converter");
+                string dir = Path.Combine(value, CompanyName, ProductLine, ApplicationName);
                 if (!Directory.Exists(dir))
                 {
                     Directory.CreateDirectory(dir);
@@ -127,12 +133,6 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
 
         public string ConfigFileLocation => Path.Combine(ConfigLocation, "default.config");
 
-
-        public void setLogBlock(TextBlock block)
-        {
-            LogBlock = block;
-            Log<string>.Singleton.setLogBlock(getLogBlock());
-        }
 
         public ScrollViewer getScrollView()
         {

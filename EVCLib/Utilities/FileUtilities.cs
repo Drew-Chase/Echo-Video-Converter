@@ -1,4 +1,5 @@
-﻿using ChaseLabs.Echo.Video_Converter.Resources;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.Echo.Video_Converter.Resources;
 using System;
 using System.Globalization;
 using System.IO;
@@ -10,7 +11,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 {
     public class FileUtilities
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
         public enum FileExtensionType
         {
             All,
@@ -80,29 +81,6 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 }
             }
         }
-
-        //public static string OpenFolder(string InitDirectory, string Title)
-        //{
-        //    using (OpenFileOrFolderDialog dialog = new OpenFileOrFolderDialog())
-        //    {
-        //        dialog.Path = InitDirectory;
-        //        dialog.Title = Title;
-        //        dialog.AcceptFiles = false;
-        //        DialogResult result = dialog.ShowDialog();
-        //        if (result == DialogResult.OK)
-        //        {
-        //            return dialog.Path;
-        //        }
-        //        else if (result == DialogResult.Cancel)
-        //        {
-        //            return string.Empty;
-        //        }
-        //        else
-        //        {
-        //            return string.Empty;
-        //        }
-        //    }
-        //}
 
         /// <summary>
         /// Opens a File or Folder Selection Dialog
@@ -196,7 +174,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
         {
             dis.Invoke(new Action(() =>
             {
-                log.Info( "Processing Directories and all Subdirectories.");
+                log.Info("Processing Directories and all Subdirectories.");
             }), DispatcherPriority.ContextIdle);
 
             MediaFiles MediaFiles = new MediaFiles();

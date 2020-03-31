@@ -1,4 +1,5 @@
-﻿using ChaseLabs.Echo.Video_Converter.Resources;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.Echo.Video_Converter.Resources;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,7 +12,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 
     public class EncoderUtilities
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
         private readonly Dispatcher dis = Dispatcher.CurrentDispatcher;
         private string currentDirectory;
         public Process process;
@@ -39,7 +40,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
         }
 
 
-        public async Task ProcessFileAsync(string file, TextBlock tb, Button button)
+        public async Task ProcessFileAsync(string file, Button button)
         {
             processBtn = button;
             original_path = file;
@@ -63,7 +64,9 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                             log.Debug($"Copying {new FileInfo(file).Name} to {Values.Singleton.ConfigUtil.TempFolderDirectory}");
                         }), DispatcherPriority.ContextIdle);
                         if (!File.Exists(f) && file != f)
+                        {
                             File.Copy(file, f);
+                        }
                         else if (File.Exists(f) && file != f)
                         {
                             File.Delete(f);
@@ -89,8 +92,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 currentDirectory = Directory.GetParent(original_path).FullName;
                 dis.Invoke(new Action(() =>
                 {
-                    Values.Singleton.setLogBlock(tb);
-                    log.Info( "Processing File: " + new FileInfo(file).Name);
+                    log.Info("Processing File: " + new FileInfo(file).Name);
                 }), DispatcherPriority.ContextIdle);
                 this.file = file;
 
@@ -100,7 +102,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 {
                     if (Values.Singleton.ConfigUtil.TempFolderDirectory.Equals(""))
                     {
-                        log.Info( "Temp Folder is not set");
+                        log.Info("Temp Folder is not set");
                         return;
                     }
 
@@ -195,20 +197,20 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 {
                     dis.Invoke(new Action(() =>
                     {
-                        log.Info( "Check was Successful");
+                        log.Info("Check was Successful");
                     }), DispatcherPriority.ContextIdle);
 
                     if (old_size <= new_size)
                     {
                         dis.Invoke(new Action(() =>
                         {
-                            log.Info( "Original File Size was smaller.");
+                            log.Info("Original File Size was smaller.");
                         }), DispatcherPriority.ContextIdle);
                         File.Delete(encoding_file);
 
                         dis.Invoke(new Action(() =>
                         {
-                            log.Info( "Removing Encoded File.");
+                            log.Info("Removing Encoded File.");
                         }), DispatcherPriority.ContextIdle);
                     }
                     else
@@ -218,8 +220,8 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 
                         dis.Invoke(new Action(() =>
                         {
-                            log.Info( "Encode Sucessful");
-                            log.Info( "You save " + FileUtilities.AdjustedFileSize(difference) + "!");
+                            log.Info("Encode Sucessful");
+                            log.Info("You save " + FileUtilities.AdjustedFileSize(difference) + "!");
                             log.Debug($"File Size Reduced by {percentage}");
                             Values.Singleton.CurrentSize.Text = "Finished!";
                             Values.Singleton.OriginalSize.Text = $"File Size Reduced by {percentage}";
@@ -232,7 +234,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 
                             dis.Invoke(new Action(() =>
                             {
-                                log.Info( "Replacing Original with Encoded File...");
+                                log.Info("Replacing Original with Encoded File...");
                             }), DispatcherPriority.ContextIdle);
                         }
                     }
@@ -245,14 +247,14 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 {
                     dis.Invoke(new Action(() =>
                     {
-                        log.Error( "Check Failed!");
-                        log.Error( "File Corrupted.");
+                        log.Error("Check Failed!");
+                        log.Error("File Corrupted.");
                     }), DispatcherPriority.ContextIdle);
                     File.Delete(encoding_file);
                     File.Delete(file);
                     dis.Invoke(new Action(() =>
                     {
-                        log.Info( "Restoring Original.");
+                        log.Info("Restoring Original.");
                     }), DispatcherPriority.ContextIdle);
                 }
             }
@@ -260,8 +262,8 @@ namespace ChaseLabs.Echo.Video_Converter.Util
             {
                 dis.Invoke(new Action(() =>
                 {
-                    log.Info( "File Couldn't Be Created!");
-                    log.Info( "Error: " + ex.StackTrace);
+                    log.Info("File Couldn't Be Created!");
+                    log.Info("Error: " + ex.StackTrace);
                     Console.WriteLine(ex.StackTrace);
                 }), DispatcherPriority.ContextIdle);
             }
@@ -269,7 +271,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
             {
                 dis.Invoke(new Action(() =>
                 {
-                    log.Info( "Unknown Error: " + ex.StackTrace);
+                    log.Info("Unknown Error: " + ex.StackTrace);
                     Console.WriteLine(ex.StackTrace);
                 }), DispatcherPriority.ContextIdle);
             }
@@ -306,7 +308,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                         File.Delete(file);
                     }
                 }
-                log.Warn( "Process Aborted!");
+                log.Warn("Process Aborted!");
             }
             catch (Exception) { }
         }
@@ -315,7 +317,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
         {
             dis.Invoke(new Action(() =>
             {
-                log.Info( "Checking File...");
+                log.Info("Checking File...");
             }), DispatcherPriority.ContextIdle);
             if (FileUtilities.FileSizeMB(new_file) >= 1)
             {

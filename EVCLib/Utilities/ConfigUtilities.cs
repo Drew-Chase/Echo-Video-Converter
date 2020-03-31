@@ -1,4 +1,5 @@
-﻿using ChaseLabs.Echo.Video_Converter.Resources;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.Echo.Video_Converter.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
 {
     public class ConfigUtilities
     {
-        static log4net.ILog log => Logging.LogHelper.GetLogger();
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
 
         public string root_path, settings_path, log_path, last_used_media_directory, default_config_file = "default.config";
         public SortType sortType;

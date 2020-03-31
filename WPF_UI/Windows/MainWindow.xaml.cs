@@ -1,15 +1,16 @@
-﻿using ChaseLabs.Echo.Video_Converter.Resources;
+﻿using ChaseLabs.CLLogger;
+using ChaseLabs.CLLogger.Events;
+using ChaseLabs.CLLogger.Interfaces;
+using ChaseLabs.Echo.Video_Converter.Resources;
 using ChaseLabs.Echo.Video_Converter.Util;
-using ChaseLabs.Logging;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-
-[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 namespace ChaseLabs.Echo.Video_Converter.Windows
 {
@@ -18,54 +19,90 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        static log4net.ILog log => LogHelper.GetLogger();
-
+        private readonly Dispatcher dis = Dispatcher.CurrentDispatcher;
+        LogManger log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
         private Util.Utilities utilities;
         private EncoderUtilities encode_util = null;
         private ConfigUtilities config;
-        public static Values values = null;
+        //public static Values values = null;
         private bool HasAborted = false;
         private Settings settingsWindow = null;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
+        double seconds = 2;
+        long currentTime = DateTime.Now.Ticks, neededTime = 0;
 
         public MainWindow()
         {
             InitializeComponent();
             onStartUp();
+            neededTime = DateTime.Now.AddSeconds(seconds).Ticks;
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    currentTime = DateTime.Now.Ticks;
+                    if (currentTime >= neededTime)
+                    {
+                        Update();
+                        neededTime = DateTime.Now.AddSeconds(seconds).Ticks;
+                    }
+                }
+            });
         }
 
         private void onStartUp()
         {
             Closed += ApplicationClosedEvent;
-            values = Values.Singleton;
+            log.LoggedMessage += OnLogMessage;
             utilities = Util.Utilities.Singleton;
             config = ConfigUtilities.Singleton;
-            values.ConfigUtil = config;
-            values.setLogBlock(ConsoleOutputTxtBlk);
-            values.setScrollView(ConsoleOutputScrView);
+            Values.Singleton.ConfigUtil = config;
+            Values.Singleton.setScrollView(ConsoleOutputScrView);
             if (config.LastUsedMediaDirectory != "")
             {
                 FileLocationTxb.Text = config.LastUsedMediaDirectory;
             }
-            values.OriginalSize = OriginalSize_Txb;
-            values.CurrentSize = CurrentSize_Txb;
+            Values.Singleton.OriginalSize = OriginalSize_Txb;
+            Values.Singleton.CurrentSize = CurrentSize_Txb;
             encode_util = EncoderUtilities.Singleton;
             string startTime = DateTime.Now.ToString();
-            LogHelper.Singleton.Init(Values.Singleton.LogFileLocation);
-            ConsoleOutputTxtBlk.Text += Console.Out.ToString();
-            //settingsWindow = new MMME.Windows.Settings(reference);
             SystemTray();
-            //Task.Run(() =>
-            //{
-            //    while (true)
-            //    {
-            //        Dispatcher.CurrentDispatcher.Invoke(new Action(() =>
-            //        {
-            //            ConsoleOutputTxtBlk.Text += Console.Out;
-            //        }), DispatcherPriority.ContextIdle);
-            //    }
-            //});
             log.Info("------------Log Start-------------------");
+        }
+
+        void Update()
+        {
+            dis.Invoke(new Action(() =>
+            {
+                try
+                {
+                    using (var reader = new StreamReader(Values.Singleton.LogFileLocation))
+                    {
+                        ConsoleOutputTxtBlk.Text = reader.ReadToEnd();
+                        ConsoleOutputScrView.ScrollToBottom();
+                    }
+                }
+                catch
+                {
+                }
+            }), DispatcherPriority.ContextIdle);
+        }
+
+        private void OnLogMessage(object sender, LogEventArgs args)
+        {
+            //try
+            //{
+            //    using (var reader = new StreamReader(Values.Singleton.LogFileLocation))
+            //    {
+            //        ConsoleOutputTxtBlk.Text = reader.ReadToEnd();
+            //    }
+            //}
+            //catch
+            //{
+
+            //}
+            //ConsoleOutputTxtBlk.Text += args.Log + Environment.NewLine;
+            Console.WriteLine(args.Log);
         }
 
         private void ApplicationClosedEvent(object sender, EventArgs e)
@@ -157,13 +194,14 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             }
 
             MediaFiles file = new MediaFiles();
+            string path = FileLocationTxb.Text;
             if (FileUtilities.IsSingleFile(FileLocationTxb.Text))
             {
-                file.Add(new MediaFile() { FilePath = FileLocationTxb.Text, ID = 0 });
+                file.Add(new MediaFile() { FilePath = path, ID = 0 });
             }
             else
             {
-                file = FileUtilities.GetFilesAsync(FileLocationTxb.Text).Result;
+                file = await Task.Run(() => FileUtilities.GetFilesAsync(path));
             }
             if (file.Count() == 0)
             {
@@ -179,8 +217,14 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
                     ProcessBtn.IsEnabled = true;
                     return;
                 }
-
-                await Task.Run(() => encode_util.ProcessFileAsync(value.FilePath, ConsoleOutputTxtBlk, ProcessBtn));
+                try
+                {
+                    await Task.Run(() => encode_util.ProcessFileAsync(value.FilePath, ProcessBtn));
+                }
+                catch (Exception e)
+                {
+                    log.Error("Check if the FFMPEG File is Availible", e);
+                }
             }
             ProcessBtn.IsEnabled = true;
             WindowState = WindowState.Normal;
@@ -188,7 +232,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (encode_util == null || encode_util.process == null || encode_util.process.HasExited)
+            if (encode_util == null || encode_util.process == null)
             {
                 Close();
                 return;
@@ -211,7 +255,6 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             encode_util.Abort(false);
             string endTime = DateTime.Now.ToString();
             log.Info("--------------Log End---------------------" + Environment.NewLine);
-            LogHelper.Singleton.Close();
             base.Close();
             Environment.Exit(0);
         }
@@ -246,7 +289,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
         {
             if (settingsWindow == null)
             {
-                settingsWindow = new Settings(values);
+                settingsWindow = new Settings();
             }
 
             settingsWindow.Show();

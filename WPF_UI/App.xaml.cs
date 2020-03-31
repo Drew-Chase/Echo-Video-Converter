@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPF_UI
+namespace ChaseLabs.Echo.Video_Converter
 {
     /// <summary>
     /// Interaction logic for App.xaml

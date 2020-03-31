@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVCLib", "EVCLib\EVCLib.csp
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWizard", "SetupWizard\SetupWizard.vdproj", "{40087D42-15A8-4EF7-B656-572F56CA7671}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLLogger", "CLLogger\CLLogger.csproj", "{D2262CE8-F42C-458A-80CB-8FE3911373FC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,14 +37,6 @@ Global
 		{40087D42-15A8-4EF7-B656-572F56CA7671}.Debug|x64.ActiveCfg = Debug
 		{40087D42-15A8-4EF7-B656-572F56CA7671}.Release|Any CPU.ActiveCfg = Release
 		{40087D42-15A8-4EF7-B656-572F56CA7671}.Release|x64.ActiveCfg = Release
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Debug|x64.Build.0 = Debug|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Release|x64.ActiveCfg = Release|Any CPU
-		{D2262CE8-F42C-458A-80CB-8FE3911373FC}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
