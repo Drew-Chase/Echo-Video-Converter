@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVCLib", "EVCLib\EVCLib.csp
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWizard", "SetupWizard\SetupWizard.vdproj", "{40087D42-15A8-4EF7-B656-572F56CA7671}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "Launcher\Launcher.csproj", "{315A400F-3799-4532-BD51-2D3440F74B8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,14 @@ Global
 		{40087D42-15A8-4EF7-B656-572F56CA7671}.Debug|x64.ActiveCfg = Debug
 		{40087D42-15A8-4EF7-B656-572F56CA7671}.Release|Any CPU.ActiveCfg = Release
 		{40087D42-15A8-4EF7-B656-572F56CA7671}.Release|x64.ActiveCfg = Release
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Debug|x64.Build.0 = Debug|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Release|x64.ActiveCfg = Release|Any CPU
+		{315A400F-3799-4532-BD51-2D3440F74B8D}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
