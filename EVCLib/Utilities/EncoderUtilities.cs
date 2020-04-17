@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace ChaseLabs.Echo.Video_Converter.Util
+namespace ChaseLabs.Echo.Video_Converter.Utilities
 {
 
     public class EncoderUtilities
     {
         private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
-        private readonly Dispatcher dis = Dispatcher.CurrentDispatcher;
+        private Dispatcher dis = Dispatcher.CurrentDispatcher;
         private string currentDirectory;
         public Process process;
-        public bool HasAborted;
+        public bool HasAborted = true;
         private Button processBtn;
         private string encoding_file, file;
         private string original_path;
@@ -83,17 +83,17 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 }
 
                 dis.Invoke(new Action(() =>
-                    {
-                        Values.Singleton.OriginalSize.Text = $"Original Size: {FileUtilities.AdjustedFileSize(file)}";
-                        Values.Singleton.OriginalSizeString = FileUtilities.AdjustedFileSize(file);
-                    }), DispatcherPriority.ContextIdle);
+                {
+                    Values.Singleton.OriginalSize.Text = $"Original Size: {FileUtilities.AdjustedFileSize(file)}";
+                    Values.Singleton.OriginalSizeString = FileUtilities.AdjustedFileSize(file);
+                }), DispatcherPriority.ContextIdle);
 
                 HasAborted = false;
                 currentDirectory = Directory.GetParent(original_path).FullName;
                 dis.Invoke(new Action(() =>
                 {
-                    log.Info("Processing File: " + new FileInfo(file).Name);
                 }), DispatcherPriority.ContextIdle);
+                log.Info("Processing File: " + new FileInfo(file).Name);
                 this.file = file;
 
                 string ffmpeg_file = Values.Singleton.FFMPEGFile;
@@ -128,15 +128,21 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 {
                     command = $" -hwaccel auto -i \"{file}\" -pix_fmt p010le -map 0:v -map 0:a -map_metadata 0 -c:v hevc_nvenc -rc constqp -qp {ffmpeg_qv} -b:v 0K -c:a aac -b:a 384k -movflags +faststart -movflags use_metadata_tags \"{encoding_file}\"";
                 }
+                else if (Values.Singleton.UseHardwareEncoding)
+                {
+                    command = $" -hwaccel -hwaccel_device auto -i \"{file}\" -pix_fmt p010le -map 0:v -map 0:a -map_metadata 0 -c:v libx264 -rc constqp -qp {ffmpeg_qv} -b:v 0K -c:a aac -b:a 384k -movflags +faststart -movflags use_metadata_tags \"{encoding_file}\"";
+                }
                 else
                 {
-                    command = $" -hwaccel auto -i \"{file}\" -pix_fmt p010le -map 0:v -map 0:a -map_metadata 0 -c:v libx264 -rc constqp -qp {ffmpeg_qv} -b:v 0K -c:a aac -b:a 384k -movflags +faststart -movflags use_metadata_tags \"{encoding_file}\"";
+                    command = $" auto -i \"{file}\" -pix_fmt p010le -map 0:v -map 0:a -map_metadata 0 -c:v libx264 -rc constqp -qp {ffmpeg_qv} -b:v 0K -c:a aac -b:a 384k -movflags +faststart -movflags use_metadata_tags \"{encoding_file}\"";
                 }
 
                 process = new Process();
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = ffmpeg_file;
-                startInfo.Arguments = command;
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = ffmpeg_file,
+                    Arguments = command
+                };
                 if (!Values.Singleton.ShowEncoderConsole)
                 {
                     startInfo.WindowStyle = ProcessWindowStyle.Hidden;
@@ -149,7 +155,6 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 }
                 process.Exited += new EventHandler(HandleExit);
                 process.StartInfo = startInfo;
-                process.PriorityBoostEnabled = true;
                 try
                 {
                     process.Start();
@@ -281,8 +286,10 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                     }
                     string done = Path.Combine(currentDirectory, $"{new FileInfo(file).Name}.done");
                     File.Create(done);
-                    FileInfo FI = new FileInfo(done);
-                    FI.Attributes = FileAttributes.Hidden;
+                    FileInfo FI = new FileInfo(done)
+                    {
+                        Attributes = FileAttributes.Hidden
+                    };
                 }
                 else
                 {
@@ -292,7 +299,8 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                         log.Error("File Corrupted.");
                     }), DispatcherPriority.ContextIdle);
                     File.Delete(encoding_file);
-                    File.Delete(file);
+                    if (Values.Singleton.IsNetworkPath)
+                        File.Delete(file);
                     dis.Invoke(new Action(() =>
                     {
                         log.Info("Restoring Original.");
@@ -316,6 +324,7 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                     Console.WriteLine(ex.StackTrace);
                 }), DispatcherPriority.ContextIdle);
             }
+            HasAborted = true;
         }
         public void Abort(bool safe_abort, params string[] message)
         {
@@ -328,8 +337,10 @@ namespace ChaseLabs.Echo.Video_Converter.Util
                 {
                     string done = Path.Combine(currentDirectory, $"{new FileInfo(file).Name}.done");
                     File.Create(done);
-                    FileInfo FI = new FileInfo(done);
-                    FI.Attributes = FileAttributes.Hidden;
+                    FileInfo FI = new FileInfo(done)
+                    {
+                        Attributes = FileAttributes.Hidden
+                    };
                 }
 
                 dis.Invoke(new Action(() =>

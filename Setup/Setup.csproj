@@ -73,20 +73,11 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CLConfiguration, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Configuration.0.0.3\lib\netstandard2.0\CLConfiguration.dll</HintPath>
-    </Reference>
-    <Reference Include="CLUpdate, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Updater.0.1.1\lib\netstandard2.0\CLUpdate.dll</HintPath>
-    </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
-    </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net47\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.3.7.0\lib\net47\MahApps.Metro.IconPacks.dll</HintPath>
@@ -254,6 +245,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Class Library\Libraries\CLUpdate\CLUpdate.csproj">
+      <Project>{8f82c2c0-4af0-4600-9fec-6c1bb7afdaca}</Project>
+      <Name>CLUpdate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EVCLib\EVCLib.csproj">
       <Project>{A7D85AC2-4EDA-440E-AC0B-33D5F99881AB}</Project>
       <Name>EVCLib</Name>
@@ -263,12 +258,6 @@
     <Resource Include="Resources\Images\Echo - Video Converter.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Echo Video Converter Banner.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Echo-Blob-Logo.gif" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

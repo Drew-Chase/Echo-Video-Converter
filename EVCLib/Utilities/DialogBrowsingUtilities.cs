@@ -1,7 +1,7 @@
-﻿using ChaseLabs.Echo.Video_Converter.Util.Exceptions;
+﻿using ChaseLabs.Echo.Video_Converter.Utilities.Exceptions;
 using System;
 
-namespace ChaseLabs.Echo.Video_Converter.Util
+namespace ChaseLabs.Echo.Video_Converter.Utilities
 {
     public static class DialogBrowsingUtilities
     {

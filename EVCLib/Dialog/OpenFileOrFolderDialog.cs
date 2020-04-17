@@ -1,4 +1,4 @@
-﻿using ChaseLabs.Echo.Video_Converter.Util;
+﻿using ChaseLabs.Echo.Video_Converter.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -286,7 +286,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows.Utilities
                                         {
                                             IntPtr hFileName = hParent.GetDlgItem(InteropUtil.ID_FileNameCombo);
                                             string currentText = (hFileName.GetWindowTextW() ?? "").Trim();
-                                            if (currentText == "" && !String.IsNullOrEmpty(m_currentFolder))
+                                            if (currentText == "" && !string.IsNullOrEmpty(m_currentFolder))
                                             {
                                                 //there's not text in the box, so the user must want to select the current folder.
                                                 m_useCurrentDir = true;
@@ -305,7 +305,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows.Utilities
                                                     break;
                                                 }
                                             }
-                                            else if (!String.IsNullOrEmpty(m_currentFolder) && currentText != "")
+                                            else if (!string.IsNullOrEmpty(m_currentFolder) && currentText != "")
                                             {
                                                 string combined = System.IO.Path.Combine(m_currentFolder, currentText);
                                                 if (Directory.Exists(combined))
@@ -608,8 +608,10 @@ namespace ChaseLabs.Echo.Video_Converter.Windows.Utilities
         {
             if (selectedIndex >= 0)
             {
-                InteropUtil.LVITEM lvitem = new InteropUtil.LVITEM();
-                lvitem.mask = InteropUtil.LVIF_TEXT;
+                InteropUtil.LVITEM lvitem = new InteropUtil.LVITEM
+                {
+                    mask = InteropUtil.LVIF_TEXT
+                };
                 IntPtr nativeBuffer = Marshal.AllocCoTaskMem(InteropUtil.NumberOfFileChars * 2);
                 for (int i = 0; i < InteropUtil.NumberOfFileChars; ++i)
                 {

@@ -30,7 +30,7 @@
     <PublisherName>Chase Labs</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>0.0.3.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -71,12 +71,6 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CLConfiguration, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Configuration.0.0.3\lib\netstandard2.0\CLConfiguration.dll</HintPath>
-    </Reference>
-    <Reference Include="CLUpdate, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Updater.0.1.1\lib\netstandard2.0\CLUpdate.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -147,6 +141,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Class Library\Libraries\CLUpdate\CLUpdate.csproj">
+      <Project>{8f82c2c0-4af0-4600-9fec-6c1bb7afdaca}</Project>
+      <Name>CLUpdate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EVCLib\EVCLib.csproj">
       <Project>{a7d85ac2-4eda-440e-ac0b-33d5f99881ab}</Project>
       <Name>EVCLib</Name>

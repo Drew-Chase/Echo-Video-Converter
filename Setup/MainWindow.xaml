@@ -48,9 +48,8 @@
 
                 </TabItem>
                 <TabItem Header="Installing" Opacity="0" IsEnabled="False">
-                    <StackPanel>
-                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="345" gif:ImageBehavior.AnimatedSource="Resources/Images/Echo-Blob-Logo.gif" Margin="88,0,123,0"/>
-                        <Label x:Name="status_lbl" Foreground="White" FontSize="45" Content="Downloading..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,0,0"/>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Label x:Name="status_lbl" Foreground="White" FontSize="100" Content="Downloading..." Width="auto" Height="auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,0,0"/>
 
                     </StackPanel>
 

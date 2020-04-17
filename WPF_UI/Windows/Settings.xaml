@@ -10,7 +10,6 @@
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
         Background="#4d4d4d"
-        MouseDown="Window_MouseDown"
         BorderThickness="0"
         BorderBrush="White"
         Title="Settings"
@@ -42,12 +41,16 @@
                 </DockPanel>
 
             </Grid>
-            <StackPanel Grid.Column="1">
-                <Button x:Name="CloseBtn" Content="X" Width="35" Height="35" HorizontalAlignment="Right" Margin="5" FontSize="25" Click="CloseBtn_Click"/>
-                <Button x:Name="MinimizeBtn" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="35" Height="36" HorizontalAlignment="Right" Margin="0,-75,55,-27"  Click="MinimizeBtn_Click">
-                    <TextBlock Text="-" FontSize="45" VerticalAlignment="Top" Margin="0,-5" FontWeight="Light" />
+            
+            <DockPanel HorizontalAlignment="Right" Grid.Column="1">
+                <Button x:Name="MinimizeBtn" Width="auto" Height="auto" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Right" >
+                    <TextBlock Text="-" FontSize="30" Margin="0,0" FontWeight="Bold" Width="auto" Height="auto" VerticalAlignment="Center" />
                 </Button>
-            </StackPanel>
+
+                <Button x:Name="CloseBtn"  Width="auto" Height="auto" VerticalAlignment="Center" Margin="5" HorizontalAlignment="Right" >
+                    <TextBlock Text="X" FontSize="20" VerticalAlignment="Center" FontWeight="Light" />
+                </Button>
+            </DockPanel>
 
             <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="10">
                 <Grid.RowDefinitions>
@@ -71,33 +74,33 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Overwrite Original Media File" HorizontalAlignment="Left"  Height="46" Width="301" FontSize="24" VerticalAlignment="Center" Margin="24,0,0,0"  />
-                    <CheckBox x:Name="Overwrite_CKBX" IsChecked="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="16"  Height="16" BorderBrush="White" Background="Transparent" Foreground="White" Click="Overwrite_CKBX_Checked" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="350,0" >
+                    <CheckBox x:Name="Overwrite_CKBX" IsChecked="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="16"  Height="16" BorderBrush="White" Background="Transparent" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="350,0" >
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
 
                     <TextBlock Text="Enclosed Folder" HorizontalAlignment="Left" Height="40" Width="158" FontSize="24" VerticalAlignment="Center" Margin="24,150,0,0"  />
-                    <CheckBox x:Name="TempEncodeFolder_CKBX" IsChecked="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="16"  Height="16" BorderBrush="White" Background="Transparent" Foreground="White" Click="TempEncodeFolder_CKBX_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,155,0,0">
+                    <CheckBox x:Name="TempEncodeFolder_CKBX" IsChecked="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="16"  Height="16" BorderBrush="White" Background="Transparent" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,155,0,0">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
 
                     <TextBox x:Name="EnclosedFolderTxtBox" Text="Source" Height="43" FontSize="24" VerticalAlignment="Center" Margin="325,304,102,152" IsEnabled="False" />
-                    <Button x:Name="EnclosedFolderOpenBtn" Width="40" Height="40" BorderThickness="0" Margin="250,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Click="EnclosedFolderOpenBtn_Click">
+                    <Button x:Name="EnclosedFolderOpenBtn" Width="50" Height="50" BorderThickness="0" Margin="250,155,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" >
                         <iconPacks:PackIconEntypo Kind="Folder" Height="25" Width="25" />
                     </Button>
 
                     <TextBlock Text="Show Encoder Console" HorizontalAlignment="Left" Height="44" Width="231" FontSize="24" VerticalAlignment="Center" Margin="24,300,0,0"  />
-                    <CheckBox x:Name="EncoderConsole_CKBX" Click="EncoderConsole_CKBX_Click" IsChecked="True"   HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="16" BorderBrush="White" Background="Transparent" Foreground="White" Height="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="275,300,0,0" >
+                    <CheckBox x:Name="EncoderConsole_CKBX" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Width="16" BorderBrush="White" Background="Transparent" Foreground="White" Height="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="275,300,0,0" >
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
 
                     <TextBlock Text="Is Network Path" HorizontalAlignment="Left"  Height="45" Width="156" FontSize="24" VerticalAlignment="Center" Margin="24,450,0,0" />
-                    <CheckBox x:Name="IsNetworkPath_CKBX" TextBlock.Foreground="White" TextBlock.TextAlignment="Left" Click="IsNetworkPath_CKBX_Click" IsChecked="True"  HorizontalContentAlignment="Right" Width="16" BorderBrush="White" Background="Transparent" Foreground="White" Height="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,450,0,0">
+                    <CheckBox x:Name="IsNetworkPath_CKBX" TextBlock.Foreground="White" TextBlock.TextAlignment="Left" IsChecked="True"  HorizontalContentAlignment="Right" Width="16" BorderBrush="White" Background="Transparent" Foreground="White" Height="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="200,450,0,0">
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </CheckBox.LayoutTransform>
@@ -106,7 +109,7 @@
 
                     <TextBlock Visibility="Hidden" Text="Sort Type" HorizontalAlignment="Left" Margin="36,383,0,0" Height="45" Width="95" FontSize="24" VerticalAlignment="Center"  />
 
-                    <ComboBox Visibility="Hidden" Name="sortType_comboBox" Margin="220,396,816,31" Text="Tddest" SelectionChanged="sortType_comboBox_SelectionChanged" Background="{x:Null}" Foreground="Black" BorderBrush="{x:Null}"  SelectedIndex="0" MaxDropDownHeight="352" FontFamily="Segoe UI Light">
+                    <ComboBox Visibility="Hidden" Name="sortType_comboBox" Margin="220,396,816,31" Text="Tddest" Background="{x:Null}" Foreground="Black" BorderBrush="{x:Null}"  SelectedIndex="0" MaxDropDownHeight="352" FontFamily="Segoe UI Light">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="ComboBoxItem">
                                 <Setter Property="Background" Value="Transparent"/>
@@ -127,34 +130,34 @@
                 <Grid>
                     <TextBlock Text="Root Location" FontSize="34" Margin="10,200,125,0" Height="45" VerticalAlignment="Top" />
                     <TextBox x:Name="RootLocation_TxtBx" IsEnabled="False" Margin="314,211,289,0" VerticalContentAlignment="Center"  FontSize="24" Height="32" Width="Auto" Text="Source" VerticalAlignment="Top" />
-                    <Button x:Name="OpenRootLocation" Margin="0,208,151,0" Click="OpenRootLocation_Click" HorizontalAlignment="Right" Width="37" Height="37" VerticalAlignment="Top">
-                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="24" Height="24" />
+                    <Button x:Name="OpenRootLocation" Margin="0,208,151,0" HorizontalAlignment="Right" Width="auto" Height="auto" VerticalAlignment="Top">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="20" Height="20" />
                     </Button>
 
                     <TextBlock Text="Log Location" Margin="10,249,0,0" HorizontalAlignment="Left" Height="45" Width="184" FontSize="34" VerticalAlignment="Top" />
                     <TextBox x:Name="LogLocation_TxtBx" IsEnabled="False" Margin="314,258,289,0" VerticalContentAlignment="Center" Text="Source"  FontSize="24" Height="32" Width="Auto" VerticalAlignment="Top" />
-                    <Button x:Name="OpenLogLocation" Margin="0,258,151,0" Click="OpenLogLocation_Click" Width="37" Height="37" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="24" Height="24" />
+                    <Button x:Name="OpenLogLocation" Margin="0,258,151,0"   Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="20" Height="20" />
                     </Button>
 
-                    <Button x:Name="OpenLogFile" Margin="0,258,109,0" Click="OpenLogFile_Click" Width="37" Height="37" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <iconPacks:PackIconMaterial Kind="File" Width="24" Height="24"  />
+                    <Button x:Name="OpenLogFile" Margin="0,258,100,0"   Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <iconPacks:PackIconMaterial Kind="File" Width="20" Height="20"  />
                     </Button>
 
                     <TextBlock Text="Config Location" HorizontalAlignment="Left" Margin="10,302,0,0" FontSize="34" Height="45" Width="224" VerticalAlignment="Top" />
                     <TextBox x:Name="ConfigLocation_TxtBx" IsEnabled="False" Margin="314,310,289,0" VerticalContentAlignment="Center" Text="Source" FontSize="24" Height="32" Width="Auto" VerticalAlignment="Top" />
-                    <Button x:Name="OpenConfigLocation" Margin="0,310,150,0" Click="OpenConfigLocation_Click" HorizontalAlignment="Right" Width="37" Height="37" VerticalAlignment="Top">
-                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="24" Height="24" />
+                    <Button x:Name="OpenConfigLocation" Margin="0,310,150,0"  HorizontalAlignment="Right" Width="auto" Height="auto" VerticalAlignment="Top">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="20" Height="20" />
                     </Button>
 
                     <TextBlock Text="Installation Location" HorizontalAlignment="Left" Margin="10,356,0,0" FontSize="34" Height="45" Width="281" VerticalAlignment="Top" />
                     <TextBox x:Name="InstallationLocation_TxtBx" IsEnabled="False" Margin="314,367,289,0" VerticalContentAlignment="Center" Text="Source" FontSize="24" Height="32" Width="Auto" VerticalAlignment="Top" />
-                    <Button x:Name="OpenInstallationLocation" Margin="0,356,150,0" Click="OpenInstallationLocation_Click" HorizontalAlignment="Right" Width="37" Height="37" VerticalAlignment="Top">
-                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="24" Height="24" />
+                    <Button x:Name="OpenInstallationLocation" Margin="0,356,150,0" HorizontalAlignment="Right" Width="auto" Height="auto" VerticalAlignment="Top">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="20" Height="20" />
                     </Button>
 
-                    <Button x:Name="OpenConfigFile" Margin="0,310,108,0" Click="OpenConfigFile_Click" Width="37" Height="37" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <iconPacks:PackIconMaterial Kind="File" Width="24" Height="24"  />
+                    <Button x:Name="OpenConfigFile" Margin="0,310,100,0" Width="auto" Height="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <iconPacks:PackIconMaterial Kind="File" Width="20" Height="20"  />
                     </Button>
 
                 </Grid>
@@ -163,19 +166,19 @@
                 <Grid>
                     <TextBlock Text="FFMPEG File Location" FontSize="34" Margin="10,200,125,0" Height="45" VerticalAlignment="Top" />
                     <TextBox x:Name="FFMPEG_TxtBx" IsEnabled="False" Margin="394,211,289,0" VerticalContentAlignment="Center"  FontSize="24" Height="32" Width="Auto" Text="Source" VerticalAlignment="Top" />
-                    <Button x:Name="SelectFFMPEGFile" Margin="0,208,151,0" Click="SelectFFMPEGFile_Click" HorizontalAlignment="Right" Width="37" Height="37" VerticalAlignment="Top">
-                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="24" Height="24" />
+                    <Button x:Name="SelectFFMPEGFile" Margin="0,208,151,0"  HorizontalAlignment="Right" Width="auto" Height="auto" VerticalAlignment="Top">
+                        <iconPacks:PackIconMaterial Kind="FolderOpen" Width="20" Height="20" />
                     </Button>
 
                     <TextBlock Text="Use Nvidia NVENC" FontSize="34" Margin="10,268,763,0" Height="auto" Width="auto" VerticalAlignment="Top" />
-                    <CheckBox x:Name="UseNvidiaNVENC_CKBX" TextBlock.Foreground="White" TextBlock.TextAlignment="Center" Click="UseNvidiaNVENC_CKBX_Checked" IsChecked="True" Margin="376,279,0,0" HorizontalContentAlignment="Center" Padding="25,25" Width="15"  BorderBrush="White" Background="Transparent" Foreground="White" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                    <CheckBox x:Name="UseNvidiaNVENC_CKBX" TextBlock.Foreground="White" TextBlock.TextAlignment="Center" IsChecked="True" Margin="376,279,0,0" HorizontalContentAlignment="Center" Padding="25,25" Width="15"  BorderBrush="White" Background="Transparent" Foreground="White" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" >
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </CheckBox.LayoutTransform>
                     </CheckBox>
 
                     <TextBlock Text="Use Hardware Encoding" FontSize="34" Margin="10,338,693,0" Height="auto" Width="auto" VerticalAlignment="Top" />
-                    <CheckBox x:Name="UseHardwareEncoding_CKBX" TextBlock.Foreground="White" TextBlock.TextAlignment="Center" Click="UseHardwareEncoding_CKBX_Checked" IsChecked="True" Margin="376,349,0,0" HorizontalContentAlignment="Center" Padding="25,25" Width="15"  BorderBrush="White" Background="Transparent" Foreground="White" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                    <CheckBox x:Name="UseHardwareEncoding_CKBX" TextBlock.Foreground="White" TextBlock.TextAlignment="Center" IsChecked="True" Margin="376,349,0,0" HorizontalContentAlignment="Center" Padding="25,25" Width="15"  BorderBrush="White" Background="Transparent" Foreground="White" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" >
                         <CheckBox.LayoutTransform>
                             <ScaleTransform ScaleX="2" ScaleY="2" />
                         </CheckBox.LayoutTransform>
@@ -198,9 +201,9 @@
 
         </TabControl>
         <Grid VerticalAlignment="Bottom" Margin="10,0" >
-            <Button x:Name="UpdateBtn" Visibility="Hidden" Content="Update Launcher" Height="48" Width="204"  Click="UpdateBtn_Click" FontSize="24" Margin="0,0,250,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
-            <Button x:Name="Clean_Logs_Btn" Content="Clean Logs"  Height="48" Width="166" FontSize="24" Click="Clean_Logs_Btn_Click" Margin="50,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
-            <TextBlock x:Name="build_txtblk" Text="Build Placement" FontSize="24" TextAlignment="Right" Opacity="0.6" Width="196" Height="39" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5" />
+            <Button x:Name="UpdateBtn" Visibility="Visible" Content="Update Launcher" Height="auto" Padding="30" Width="auto" FontSize="24" Margin="257,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+            <Button x:Name="Clean_Logs_Btn" Content="Clean Logs"  Height="auto" Width="auto" FontSize="24" Margin="50,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+            <TextBlock x:Name="build_txtblk" Text="Build Placement" FontSize="24" TextAlignment="Right" Opacity="0.6" Width="auto" Height="39" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,5" />
         </Grid>
     </Grid>
 </Window>

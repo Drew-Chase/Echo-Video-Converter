@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ChaseLabs.Echo.Video_Converter.Util
+namespace ChaseLabs.Echo.Video_Converter.Utilities
 {
     public static class InteropUtil
     {

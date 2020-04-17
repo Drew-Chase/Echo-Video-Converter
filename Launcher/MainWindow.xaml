@@ -10,7 +10,6 @@
         WindowStyle="None"
         Foreground="White"
         ResizeMode="NoResize"
-        MouseDown="Window_MouseDown"
         Background="#363636"
         Title="Launcher" Height="525" Width="350">
     <Grid >

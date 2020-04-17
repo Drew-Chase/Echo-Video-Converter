@@ -1,8 +1,9 @@
 ﻿using ChaseLabs.CLLogger;
 using ChaseLabs.CLUpdate.Lists;
-using ChaseLabs.Echo.Video_Converter.Util;
+using ChaseLabs.Echo.Video_Converter.Utilities;
 using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Controls;
 
 namespace ChaseLabs.Echo.Video_Converter.Resources
@@ -50,8 +51,14 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         public bool ShowEncoderConsole { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Show Encoder Console").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Show Encoder Console").ParseBoolean(); }
         public bool IsNetworkPath { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Is Network Path").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Is Network Path").ParseBoolean(); }
         public bool UseNvidiaNVENC { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Nvidia NVENC").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Nvidia NVENC").ParseBoolean(); }
+        public bool UseHardwareEncoding { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Hardware Encoding").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Hardware Encoding").ParseBoolean(); }
         public bool OverwriteOriginal { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Overwrite Original").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Overwrite Original").ParseBoolean(); }
         public string FFMPEGFile { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("FFMPEG File Path").Value = value; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("FFMPEG File Path").Value; }
+
+        public string DefaultFFMPEGFile => Path.Combine(Values.Singleton.ApplicationDirectory, "FFMPEG", "bin", "x64", "ffmpeg.exe");
+        public string FFMPEGDirectory => Directory.GetParent(FFMPEGFile).FullName;
+        public string LogFileLocation => Path.Combine(LogLocation, "latest.log");
+        public string ConfigFileLocation => Path.Combine(ConfigLocation, "default.config");
 
         public string CurrentSizeString { get; set; }
         public string OriginalSizeString { get; set; }
@@ -89,9 +96,12 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         {
             get
             {
-                var version = new Versions(VersionPath);
+                Versions version = new Versions(VersionPath);
                 if (version.GetVersion(ApplicationVersionKey) != null)
+                {
                     return $"app-v.{version.GetVersion(ApplicationVersionKey).Value}";
+                }
+
                 return "";
             }
         }
@@ -100,51 +110,29 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         {
             get
             {
-                var version = new Versions(VersionPath);
+                Versions version = new Versions(VersionPath);
                 if (version.GetVersion(LauncherVersionKey) != null)
+                {
                     return $"launcher-v.{version.GetVersion(LauncherVersionKey).Value}";
+                }
+
                 return "";
             }
         }
 
-        public string InstallationFolder => Environment.CurrentDirectory;
+        public string InstallationFolder => Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName;
 
-        private string configlocation = "";
-        public string ConfigLocation
-        {
-            get => configlocation;
-            set
-            {
-                string dir = Path.Combine(value, "Configurations");
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-
-                configlocation = dir;
-            }
-        }
-
-        private string loglocation = "";
-        public string LogLocation
-        {
-            get => loglocation;
-            set
-            {
-                string dir = Path.Combine(value, "Logs");
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-
-                loglocation = dir;
-            }
-        }
 
         private string rootlocation = "";
         public string RootLocation
         {
-            get => rootlocation;
+            get
+            {
+                if (rootlocation == "")
+                    RootLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                return rootlocation;
+            }
             set
             {
                 string dir = Path.Combine(value, CompanyName, ProductLine, ApplicationName);
@@ -153,9 +141,36 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
                     Directory.CreateDirectory(dir);
                 }
 
-                LogLocation = dir;
-                ConfigLocation = dir;
                 rootlocation = dir;
+            }
+        }
+
+
+        public string ConfigLocation
+        {
+            get
+            {
+                string dir = Path.Combine(RootLocation, "Configurations");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                return dir;
+            }
+        }
+
+        public string LogLocation
+        {
+            get
+            {
+                string dir = Path.Combine(RootLocation, "Logs");
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+
+                return dir;
             }
         }
 
@@ -170,23 +185,6 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
                 }
                 return dir;
             }
-        }
-
-        public string FFMPEGDirectory => Directory.GetParent(FFMPEGFile).FullName;
-
-
-        public string LogFileLocation => Path.Combine(LogLocation, "latest.log");
-
-        public string ConfigFileLocation => Path.Combine(ConfigLocation, "default.config");
-
-
-        public ScrollViewer getScrollView()
-        {
-            return sv;
-        }
-        public void setScrollView(ScrollViewer block)
-        {
-            sv = block;
         }
 
     }

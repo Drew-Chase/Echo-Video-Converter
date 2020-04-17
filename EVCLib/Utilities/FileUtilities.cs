@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Threading;
 
-namespace ChaseLabs.Echo.Video_Converter.Util
+namespace ChaseLabs.Echo.Video_Converter.Utilities
 {
     public class FileUtilities
     {

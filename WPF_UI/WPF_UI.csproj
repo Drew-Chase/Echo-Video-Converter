@@ -32,7 +32,7 @@
     <ProductName>Echo Video Converter</ProductName>
     <PublisherName>Chase Labs</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -100,14 +100,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CLConfiguration, Version=0.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Configuration.0.0.3\lib\netstandard2.0\CLConfiguration.dll</HintPath>
-    </Reference>
     <Reference Include="CLLogger, Version=0.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Logger.0.0.7\lib\netstandard2.0\CLLogger.dll</HintPath>
-    </Reference>
-    <Reference Include="CLUpdate, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Updater.0.1.1\lib\netstandard2.0\CLUpdate.dll</HintPath>
     </Reference>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\ControlzEx.dll</HintPath>
@@ -351,6 +345,10 @@
     <Resource Include="Images\Echo Video Converter Banner.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Class Library\Libraries\CLUpdate\CLUpdate.csproj">
+      <Project>{8f82c2c0-4af0-4600-9fec-6c1bb7afdaca}</Project>
+      <Name>CLUpdate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EVCLib\EVCLib.csproj">
       <Project>{a7d85ac2-4eda-440e-ac0b-33d5f99881ab}</Project>
       <Name>EVCLib</Name>
