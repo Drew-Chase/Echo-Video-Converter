@@ -40,11 +40,8 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         public string VersionFileName => "Version";
         public string VersionPath => Path.Combine(ConfigLocation, VersionFileName);
         public string ApplicationVersionKey => "Application";
-        public string LauncherVersionKey => "Launcher";
+        public string LauncherVersionKey => "LAUNCHER";
         public string RemoteVersionURL => "https://www.dropbox.com/s/nsxijbp9hkrbr1p/version?dl=1";
-        public string LauncherURL => "https://www.dropbox.com/s/kqvc6nw10nht0m1/launcher.zip?dl=1";
-        public string ApplicationURL => "https://www.dropbox.com/s/5p5qbhl97emxn4k/application.zip?dl=1";
-
         public string LastUsedMediaDirectory { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Last Used Media Directory").Value = value; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Last Used Media Directory").Value; }
         public bool UseEnclosedFolder { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Enclosed Folder").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Enclosed Folder").ParseBoolean(); }
         public string TempFolderLocation { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Temp Folder Location").Value = value; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Temp Folder Location").Value; }

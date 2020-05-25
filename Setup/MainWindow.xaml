@@ -16,13 +16,14 @@
     <Grid>
         <Button Name="ExitBtn" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Background="Transparent" BorderThickness="0" Foreground="White" FontSize="14" />
         <StackPanel>
-            <Label Name="TitleLbl" Foreground="#d900d9" FontSize="72" Content="Echo Video Converter - Setup" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,50,0"/>
+            <Label Name="TitleLbl" Foreground="#FFA800" FontSize="72" Content="Horror Game - Setup" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,50,0"/>
             <TabControl Name="TabedContentFrame" BorderThickness="0" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Height="445">
                 <TabItem Header="Welcome" Opacity="0" IsEnabled="False">
                     <StackPanel>
-                        <Label Foreground="#d900d9" FontSize="34" Content="Welcome to Echo Video Converter Setup" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,50,0"/>
+                        <Label Foreground="#FFA800" FontSize="34" Content="Welcome to Horror Game Launcher Setup" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,50,0"/>
                         <TextBlock Foreground="White" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="40,10" >
-                            A Media Encoder that allows you to shrink multiple large media files to the smallest size without compromising video quality.
+                            A Test Horror Game<LineBreak />  
+                            It was Created by Drew Chase
                         </TextBlock>
                     </StackPanel>
 
@@ -48,8 +49,9 @@
 
                 </TabItem>
                 <TabItem Header="Installing" Opacity="0" IsEnabled="False">
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Label x:Name="status_lbl" Foreground="White" FontSize="100" Content="Downloading..." Width="auto" Height="auto" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,0,0"/>
+                    <StackPanel>
+                        <Image HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="276" Width="276" gif:ImageBehavior.AnimatedSource="Resources/Images/SyncHole-Logo.gif" Margin="0"/>
+                        <Label Name="status_lbl" Foreground="#FFA800" FontSize="45" Content="Downloading..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,0,0,0"/>
 
                     </StackPanel>
 

@@ -1,5 +1,4 @@
 ﻿using ChaseLabs.CLUpdate;
-using ChaseLabs.Echo.Video_Converter.Resources;
 using IWshRuntimeLibrary;
 using System;
 using System.IO;
@@ -38,7 +37,7 @@ namespace Launcher
             desktop_shortcut_chkbx.Click += (object sender, RoutedEventArgs e) => { create_desktop_shortcut = (bool)((System.Windows.Controls.CheckBox)sender).IsChecked; };
             launch_on_completion_chkbx.Click += (object sender, RoutedEventArgs e) => { launch_on_completion = (bool)((System.Windows.Controls.CheckBox)sender).IsChecked; };
 
-            FinishBtn.Click += ((object sender, RoutedEventArgs e) => { if (launch_on_completion && update != null) { update.LaunchExecutable(); } Environment.Exit(0); });
+            FinishBtn.Click += ((object sender, RoutedEventArgs e) => { if (launch_on_completion && update != null) { update.LaunchExecutable(); } });
 
             NextBtn.Click += ((object sender, RoutedEventArgs e) =>
             {
@@ -74,7 +73,7 @@ namespace Launcher
             desktop_shortcut_chkbx.IsChecked = true;
             launch_on_completion_chkbx.IsChecked = true;
             TitleLbl.Content = ((TabItem)TabedContentFrame.Items[0]).Header;
-            install_dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Chase Labs", "Echo Video Converter");
+            install_dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Chase Labs", "Horror Game Launcher");
             InstallDirectoryTxb.Text = install_dir;
         }
 
@@ -99,7 +98,7 @@ namespace Launcher
                 }
                 else
                 {
-                    install_dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), Values.Singleton.CompanyName, Values.Singleton.ApplicationName);
+                    install_dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Chase Labs", "Horror Game Launcher");
                     InstallDirectoryTxb.Text = install_dir;
                 }
 
@@ -108,11 +107,10 @@ namespace Launcher
 
         private void Install()
         {
-            UpdateManager.Singleton.CheckForUpdate(Values.Singleton.LauncherVersionKey, Values.Singleton.VersionPath, Values.Singleton.RemoteVersionURL);
             status_lbl.Content = "Preparing Installer...";
             Task.Run(() =>
             {
-                update = Updater.Init(Values.Singleton.LauncherURL, System.IO.Path.Combine(Environment.GetEnvironmentVariable("TMP"), "Update"), install_dir, System.IO.Path.Combine(install_dir, "Echo Video Converter.exe"), true);
+                update = Updater.Init("https://www.dropbox.com/s/3ipx1tk07zw8r35/Launcher.zip?dl=1", System.IO.Path.Combine(Environment.GetEnvironmentVariable("TMP"), "Update"), install_dir, System.IO.Path.Combine(install_dir, "Horror Game Launcher.exe"), true);
                 dis.Invoke(new Action(() =>
                 {
                     status_lbl.Content = "Installing...";
@@ -144,10 +142,10 @@ namespace Launcher
                 {
                     status_lbl.Content = "Launching Application...";
                 }), DispatcherPriority.ContextIdle);
-                CreateShortcut(Values.Singleton.ApplicationName, System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "Chase Labs"), System.IO.Path.Combine(install_dir, "Echo Video Converter.exe"));
+                CreateShortcut("Horror Game", System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu), "Chase Labs"), System.IO.Path.Combine(install_dir, "Horror Game Launcher.exe"));
                 if (create_desktop_shortcut)
                 {
-                    CreateShortcut(Values.Singleton.ApplicationName, Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), System.IO.Path.Combine(install_dir, "Echo Video Converter.exe"));
+                    CreateShortcut("Horror Game", Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), System.IO.Path.Combine(install_dir, "Horror Game Launcher.exe"));
                 }
 
                 dis.Invoke(new Action(() =>
@@ -155,7 +153,6 @@ namespace Launcher
                     TabedContentFrame.SelectedIndex++;
                 }), DispatcherPriority.ContextIdle);
 
-                UpdateManager.Singleton.UpdateVersionFile(Values.Singleton.LauncherVersionKey);
             });
         }
 
@@ -169,8 +166,8 @@ namespace Launcher
             string shortcutLocation = System.IO.Path.Combine(shortcutPath, shortcutName + ".lnk");
             WshShell shell = new WshShell();
             IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shortcutLocation);
-            shortcut.Description = "Launches Echo Video Converter";   // The description of the shortcut
-            shortcut.IconLocation = System.IO.Path.Combine(Directory.GetParent(targetFileLocation).FullName, "Echo - Video Converter.ico");           // The icon of the shortcut
+            shortcut.Description = "Launches the Horror Game Launcher";   // The description of the shortcut
+            shortcut.IconLocation = System.IO.Path.Combine(Directory.GetParent(targetFileLocation).FullName, "icon.ico");           // The icon of the shortcut
             shortcut.TargetPath = targetFileLocation;                 // The path of the file that will launch when the shortcut is run
             shortcut.Save();                                    // Save the shortcut
         }

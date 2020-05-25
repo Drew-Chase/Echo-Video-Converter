@@ -17,7 +17,6 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
         private string currentDirectory;
         public Process process;
         public bool HasAborted = true;
-        private Button processBtn;
         private string encoding_file, file;
         private string original_path;
         public bool should_run = true, ready = false;
@@ -40,9 +39,8 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
         }
 
 
-        public async Task ProcessFileAsync(string file, Button button)
+        public async Task ProcessFileAsync(string file)
         {
-            processBtn = button;
             original_path = file;
             foreach (FileInfo f in Directory.GetParent(file).GetFiles())
             {
@@ -324,7 +322,6 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                     Console.WriteLine(ex.StackTrace);
                 }), DispatcherPriority.ContextIdle);
             }
-            HasAborted = true;
         }
         public void Abort(bool safe_abort, params string[] message)
         {
@@ -345,11 +342,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
 
                 dis.Invoke(new Action(() =>
                 {
-                    processBtn.IsEnabled = true;
-                    foreach (string s in message)
-                    {
-                        log.Debug(s);
-                    }
+                        log.Debug(message);
                 }));
                 if (encoding_file != string.Empty && File.Exists(encoding_file))
                 {

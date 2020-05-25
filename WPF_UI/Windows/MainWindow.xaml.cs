@@ -56,7 +56,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
                 }
                 else
                 {
-                    log.Info("Exit Canceld!");
+                    log.Info("Exit Canceled!");
                     log.Warn("Encoding Still Running!");
                 }
             });
@@ -172,20 +172,17 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             {
                 log.Warn("No Temp Directory Specified");
                 log.Warn("A Temp Directory needs to be specified if the file is on a network path");
-                encoder.HasAborted = true;
                 return;
             }
 
             if (!Values.Singleton.UseEnclosedFolder && Values.Singleton.TempFolderLocation.Equals(""))
             {
                 log.Warn("No Temp Directory Specified");
-                encoder.HasAborted = true;
                 return;
             }
             if (FileLocationTxb.Text.ToLower() == "source")
             {
                 log.Warn("No Directory Specified");
-                encoder.HasAborted = true;
                 return;
             }
 
@@ -195,7 +192,6 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             {
                 log.Warn("Process Canceled");
                 log.Debug("No Hard Feelings.");
-                encoder.HasAborted = true;
                 return;
             }
             if (!encoder.HasAborted)
@@ -216,7 +212,6 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             if (file.Count() == 0)
             {
                 log.Error("No Media Files Found in " + FileUtilities.directory);
-                encoder.HasAborted = true;
                 ProcessBtn.IsEnabled = true;
                 return;
             }
@@ -224,12 +219,11 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             {
                 if (encoder.HasAborted)
                 {
-                    ProcessBtn.IsEnabled = true;
                     return;
                 }
                 try
                 {
-                    await Task.Run(() => encoder.ProcessFileAsync(value.FilePath, ProcessBtn));
+                    await Task.Run(() => encoder.ProcessFileAsync(value.FilePath));
                 }
                 catch (Exception e)
                 {

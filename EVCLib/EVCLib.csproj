@@ -53,8 +53,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CLConfiguration, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ChaseLabs.Configuration.0.0.4\lib\netstandard2.0\CLConfiguration.dll</HintPath>
+    </Reference>
     <Reference Include="CLLogger, Version=0.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Logger.0.0.7\lib\netstandard2.0\CLLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="CLUpdate, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ChaseLabs.Updater.0.1.4\lib\netstandard2.0\CLUpdate.dll</HintPath>
     </Reference>
     <Reference Include="FFMpegSharp, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FFMpegSharp.2.1.0\lib\net45\FFMpegSharp.dll</HintPath>
@@ -145,16 +151,6 @@
     <Content Include="FFMPEG\bin\x64\ffprobe.exe" />
     <Content Include="FFMPEG\bin\x86\ffmpeg.exe" />
     <Content Include="FFMPEG\bin\x86\ffprobe.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Class Library\Libraries\CLConfiguration\CLConfiguration.csproj">
-      <Project>{20ee5401-ebf3-4af9-8c90-a51d3b2d2c07}</Project>
-      <Name>CLConfiguration</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Class Library\Libraries\CLUpdate\CLUpdate.csproj">
-      <Project>{8f82c2c0-4af0-4600-9fec-6c1bb7afdaca}</Project>
-      <Name>CLUpdate</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

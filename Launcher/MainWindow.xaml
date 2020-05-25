@@ -4,17 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Launcher"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        WindowStartupLocation="CenterScreen"
-        mc:Ignorable="d"
         WindowStyle="None"
-        Foreground="White"
+        WindowStartupLocation="CenterScreen"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         ResizeMode="NoResize"
-        Background="#363636"
-        Title="Launcher" Height="525" Width="350">
-    <Grid >
-        <Label x:Name="title_lbl" Foreground="White" Content="Echo Video Converter" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30"/>
-        <Label x:Name="status_lbl" Foreground="White" Content="Checking For Updates..." FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65"/>
-        <Image x:Name="image" HorizontalAlignment="Center" Height="305" VerticalAlignment="Center" Width="340" gif:ImageBehavior.AnimatedSource="Loading.gif" Stretch="UniformToFill" Margin="5,88,5,132"/>
+        Background="#262626"
+        Foreground="White"
+        mc:Ignorable="d"
+        Title="SyncHole Launcher" Height="625" Width="390">
+    <Grid>
+        <Button Name="ExitBtn" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Background="Transparent" BorderThickness="0" Foreground="White" FontSize="14" />
+        <StackPanel>
+            <Label Foreground="#FFA800" FontSize="38" Content="Echo Video Converter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,40,10,0"/>
+            <Image HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="355" gif:ImageBehavior.AnimatedSource="Images/Lab-Beaker.gif" Margin="10,0"/>
+            <Label x:Name="status_lbl" Foreground="#FFA800" FontSize="30" Content="Loading..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  />
+        </StackPanel>
     </Grid>
 </Window>

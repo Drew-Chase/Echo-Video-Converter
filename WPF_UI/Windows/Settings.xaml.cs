@@ -33,7 +33,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
             //Nav Buttons
             MinimizeBtn.Click += ((object sender, RoutedEventArgs e) => { WindowState = WindowState.Minimized; });
             CloseBtn.Click += ((object sender, RoutedEventArgs e) => Hide());
-            UpdateBtn.Click += ((object sender, RoutedEventArgs e) => VersionControlUtilities.UpdateLauncher());
+            //UpdateBtn.Click += ((object sender, RoutedEventArgs e) => VersionControlUtilities.UpdateLauncher());
             Clean_Logs_Btn.Click += ((object sender, RoutedEventArgs e) => InterfaceUtilities.Singleton.CleanLogs());
 
             //Select File Button
