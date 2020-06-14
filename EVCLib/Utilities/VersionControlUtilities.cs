@@ -25,7 +25,14 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
     {
         static Dispatcher dis = Dispatcher.CurrentDispatcher;
 
-        public static bool IsLauncherUpToDate => !UpdateManager.Singleton.CheckForUpdate(Values.Singleton.LauncherVersionKey, Values.Singleton.VersionPath, Values.Singleton.RemoteVersionURL);
+        public static bool IsLauncherUpToDate
+        {
+            get
+            {
+                UpdateManager.Singleton.Init(Values.Singleton.RemoteVersionURL, Values.Singleton.VersionPath);
+                return !UpdateManager.Singleton.CheckForUpdate(Values.Singleton.LauncherVersionKey, Values.Singleton.VersionPath, Values.Singleton.RemoteVersionURL);
+            }
+        }
         public static void UpdateLauncher()
         {
             string remote_version = Values.Singleton.RemoteVersionURL;

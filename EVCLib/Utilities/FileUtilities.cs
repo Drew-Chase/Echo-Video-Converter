@@ -230,7 +230,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                 long num = info.Length;
                 return num;
             }
-            catch (System.IO.FileNotFoundException e) { }
+            catch (System.IO.FileNotFoundException) { }
             catch { }
             return 0;
         }

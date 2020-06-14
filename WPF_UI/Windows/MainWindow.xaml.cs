@@ -36,8 +36,6 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
 
         private void RegisterEvents()
         {
-            //log.LoggedMessage += OnLogMessage;
-            //Closed += ApplicationClosedEvent;
             OpenFolderBtn.Click += ((object sender, RoutedEventArgs e) => { FileLocationTxb.Text = InterfaceUtilities.Singleton.SelectWorkingDirectory(FileLocationTxb.Text); });
             SelectFileBtn.Click += ((object sender, RoutedEventArgs e) => { FileLocationTxb.Text = InterfaceUtilities.Singleton.SelectWorkingFile(FileLocationTxb.Text); });
             ProcessBtn.Click += ((object sender, RoutedEventArgs e) => Process());

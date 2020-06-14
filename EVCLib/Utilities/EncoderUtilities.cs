@@ -328,7 +328,8 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
             try
             {
                 HasAborted = true;
-                process.Kill();
+                if (process != null)
+                    process.Kill();
 
                 if (safe_abort)
                 {
@@ -342,7 +343,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
 
                 dis.Invoke(new Action(() =>
                 {
-                        log.Debug(message);
+                    log.Debug(message);
                 }));
                 if (encoding_file != string.Empty && File.Exists(encoding_file))
                 {
