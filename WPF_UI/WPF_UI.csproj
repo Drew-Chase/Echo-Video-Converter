@@ -36,7 +36,7 @@
     <ProductName>Echo Video Converter</ProductName>
     <PublisherName>Chase Labs</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -188,8 +188,8 @@
     <Reference Include="CLLogger, Version=0.0.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Logger.0.0.7\lib\netstandard2.0\CLLogger.dll</HintPath>
     </Reference>
-    <Reference Include="CLUpdate, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Updater.0.1.4\lib\netstandard2.0\CLUpdate.dll</HintPath>
+    <Reference Include="CLUpdate, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ChaseLabs.Updater.0.1.5\lib\netstandard2.0\CLUpdate.dll</HintPath>
     </Reference>
     <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.4.3.0\lib\net462\ControlzEx.dll</HintPath>
