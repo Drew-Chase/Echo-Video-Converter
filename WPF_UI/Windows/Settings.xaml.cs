@@ -136,6 +136,7 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
                         UpdateBtn.IsEnabled = true;
                         UpdateBtn.Content = "Launcher Update Needed";
                         UpdateBtn.Visibility = Visibility.Visible;
+                        UpdateBtn.Click += ((object sender, RoutedEventArgs e) => VersionControlUtilities.UpdateLauncher());
                     }, DispatcherPriority.Normal);
                 }
                 else

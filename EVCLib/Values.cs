@@ -51,6 +51,7 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         public bool UseHardwareEncoding { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Hardware Encoding").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Use Hardware Encoding").ParseBoolean(); }
         public bool OverwriteOriginal { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Overwrite Original").Value = value + ""; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Overwrite Original").ParseBoolean(); }
         public string FFMPEGFile { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("FFMPEG File Path").Value = value; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("FFMPEG File Path").Value; }
+        public string LauncherDirectory { set => ConfigUtilities.Singleton.Manager.GetConfigByKey("Launcher Directory").Value = value; get => ConfigUtilities.Singleton.Manager.GetConfigByKey("Launcher Directory").Value; }
 
         public string DefaultFFMPEGFile => Path.Combine(Values.Singleton.ApplicationDirectory, "FFMPEG", "bin", "x64", "ffmpeg.exe");
         public string FFMPEGDirectory => Directory.GetParent(FFMPEGFile).FullName;
@@ -118,7 +119,6 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         }
 
         public string InstallationFolder => Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName;
-
 
         private string rootlocation = "";
         public string RootLocation

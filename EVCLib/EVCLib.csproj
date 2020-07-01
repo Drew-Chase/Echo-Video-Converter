@@ -17,11 +17,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,8 +57,9 @@
     <Reference Include="CLConfiguration, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Configuration.0.0.4\lib\netstandard2.0\CLConfiguration.dll</HintPath>
     </Reference>
-    <Reference Include="CLLogger, Version=0.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Logger.0.0.7\lib\netstandard2.0\CLLogger.dll</HintPath>
+    <Reference Include="CLLogger, Version=0.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\drew_\Documents\DLLs\netstandard2.0\CLLogger.dll</HintPath>
     </Reference>
     <Reference Include="CLUpdate, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Updater.0.1.5\lib\netstandard2.0\CLUpdate.dll</HintPath>

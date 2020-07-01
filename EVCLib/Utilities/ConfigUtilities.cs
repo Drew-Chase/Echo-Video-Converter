@@ -33,6 +33,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
             Manager.Add("Use Nvidia NVENC", "False");
             Manager.Add("Use Hardware Encoding", "False");
             Manager.Add("Overwrite Original", "False");
+            Manager.Add("Launcher Directory", "");
 
             //CheckDefaults();
 

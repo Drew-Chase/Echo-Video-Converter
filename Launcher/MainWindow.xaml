@@ -11,13 +11,13 @@
         Background="#262626"
         Foreground="White"
         mc:Ignorable="d"
-        Title="SyncHole Launcher" Height="625" Width="390">
+        Title="SyncHole Launcher" Height="625" Width="450">
     <Grid>
         <Button Name="ExitBtn" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Background="Transparent" BorderThickness="0" Foreground="White" FontSize="14" />
         <StackPanel>
-            <Label Foreground="#FFA800" FontSize="38" Content="Echo Video Converter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,40,10,0"/>
-            <Image HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="355" gif:ImageBehavior.AnimatedSource="Images/Lab-Beaker.gif" Margin="10,0"/>
-            <Label x:Name="status_lbl" Foreground="#FFA800" FontSize="30" Content="Loading..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  />
+            <Label Foreground="#FF00FF" FontSize="38" Content="Echo Video Converter" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Stretch"  Margin="0,40,10,0"/>
+            <Image HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="444" gif:ImageBehavior.AnimatedSource="Images/Lab-Beaker.gif" Margin="10,0"/>
+            <Label x:Name="status_lbl" Foreground="#FF00FF" FontSize="30" Content="Loading..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"  />
         </StackPanel>
     </Grid>
 </Window>

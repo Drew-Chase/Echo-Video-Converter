@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Workspaces\Visual Studio Workspace\C#\Desktop App\HorrorGame\Exports\</PublishUrl>
+    <PublishUrl>D:\Workspaces\Visual Studio Workspace\C#\Desktop App\EchoVideoConverter\Exports\Launcher\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -53,7 +53,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\Echo - Video Converter.ico</ApplicationIcon>
+    <ApplicationIcon>Echo - Video Converter.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
@@ -74,8 +74,8 @@
     <Reference Include="CLConfiguration, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Configuration.0.0.4\lib\netstandard2.0\CLConfiguration.dll</HintPath>
     </Reference>
-    <Reference Include="CLUpdate, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Updater.0.1.4\lib\netstandard2.0\CLUpdate.dll</HintPath>
+    <Reference Include="CLUpdate, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ChaseLabs.Updater.0.1.5\lib\netstandard2.0\CLUpdate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -174,7 +174,9 @@
     <Resource Include="Images\Echo-Blob-Logo.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Echo - Video Converter.ico" />
+    <Resource Include="Echo - Video Converter.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Echo Video Converter Banner.png" />

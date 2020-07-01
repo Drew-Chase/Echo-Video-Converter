@@ -11,7 +11,7 @@
     <ProjectGuid>{90DAE0E3-7819-4F73-9858-7159BBC3C6D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ChaseLabs.Echo.Video_Converter</RootNamespace>
-    <AssemblyName>application</AssemblyName>
+    <AssemblyName>Echo Video Converter</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,7 +36,7 @@
     <ProductName>Echo Video Converter</ProductName>
     <PublisherName>Chase Labs</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -185,8 +185,9 @@
     <Reference Include="CLConfiguration, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Configuration.0.0.4\lib\netstandard2.0\CLConfiguration.dll</HintPath>
     </Reference>
-    <Reference Include="CLLogger, Version=0.0.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Logger.0.0.7\lib\netstandard2.0\CLLogger.dll</HintPath>
+    <Reference Include="CLLogger, Version=0.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\drew_\Documents\DLLs\netstandard2.0\CLLogger.dll</HintPath>
     </Reference>
     <Reference Include="CLUpdate, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Updater.0.1.5\lib\netstandard2.0\CLUpdate.dll</HintPath>

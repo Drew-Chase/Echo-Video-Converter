@@ -12,8 +12,7 @@ namespace LauncherUpdater
             string path = args[0];
             string url = args[1];
             string exe_name = args[2];
-            //Console.ReadLine();
-            Thread.Sleep(2 * 1000);
+            Thread.Sleep(1000);
             Download(path, url, exe_name, 0);
         }
 
@@ -21,8 +20,8 @@ namespace LauncherUpdater
         {
             long current = DateTime.Now.Ticks;
             long wanted = DateTime.Now.AddSeconds(2).Ticks;
-            Console.WriteLine($"Working on Attempt #{attempt}");
-
+            if (attempt != 0)
+                Console.WriteLine($"Working on Attempt #{attempt}");
             try
             {
                 foreach (var file in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
@@ -38,9 +37,8 @@ namespace LauncherUpdater
                 update.CleanUp();
                 Thread.Sleep(1000);
                 update.LaunchExecutable();
-                Console.ReadLine();
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
                 while (current < wanted)
@@ -48,7 +46,7 @@ namespace LauncherUpdater
                     current = DateTime.Now.Ticks;
                 }
                 Console.ReadLine();
-                //return Download(path, url, exe_name, attempt + 1);
+                return Download(path, url, exe_name, attempt + 1);
             }
             return true;
         }

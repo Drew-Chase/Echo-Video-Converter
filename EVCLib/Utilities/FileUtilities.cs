@@ -191,7 +191,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                 {
 
                     FileInfo fileInfo = new FileInfo(j);
-                    if (!fileInfo.Name.Contains($"{fileInfo.Name}.done"))
+                    if (!(fileInfo.Name.Contains($".done")))
                     {
                         dis.Invoke(new Action(() =>
                         {
