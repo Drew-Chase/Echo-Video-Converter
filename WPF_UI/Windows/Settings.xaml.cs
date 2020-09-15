@@ -17,9 +17,9 @@ namespace ChaseLabs.Echo.Video_Converter.Windows
     /// </summary>
     public partial class Settings : Window
     {
-        public ILog log => LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        public ILog log => LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
         private List<Button> navButtons;
-        Dispatcher dis = Dispatcher.CurrentDispatcher;
+        private readonly Dispatcher dis = Dispatcher.CurrentDispatcher;
 
         public Settings()
         {

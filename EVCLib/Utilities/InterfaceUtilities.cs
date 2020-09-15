@@ -1,10 +1,8 @@
 ﻿using ChaseLabs.CLLogger;
-using ChaseLabs.CLUpdate;
 using ChaseLabs.Echo.Video_Converter.Resources;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 
 namespace ChaseLabs.Echo.Video_Converter.Utilities
@@ -12,7 +10,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
     public class InterfaceUtilities
     {
         public Dispatcher dis => Dispatcher.CurrentDispatcher;
-        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
         private static InterfaceUtilities _singleton;
         public static InterfaceUtilities Singleton
         {

@@ -11,7 +11,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
 {
     public class FileUtilities
     {
-        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
         public enum FileExtensionType
         {
             All,
@@ -184,6 +184,12 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                 log.Info("Processing Directories and all Subdirectories.");
             }), DispatcherPriority.ContextIdle);
 
+            Values.Singleton.MainThreadDispatcher.Invoke(new Action(() =>
+            {
+                Values.Singleton.ProcessingOverlayText.Text = "Processing Directories and All Subdirectories.";
+                Application.Exit();
+            }), DispatcherPriority.ContextIdle);
+
             MediaFiles MediaFiles = new MediaFiles();
             foreach (string s in Values.MediaExtensions)
             {
@@ -197,12 +203,22 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                         {
                             log.Debug($"Found {fileInfo.Name}");
                         }), DispatcherPriority.ContextIdle);
+
+                        Values.Singleton.MainThreadDispatcher.Invoke(new Action(() =>
+                        {
+                            Values.Singleton.ProcessingOverlayText.Text = $"Found {fileInfo.Name}";
+                        }), DispatcherPriority.ContextIdle);
                     }
                     else
                     {
                         dis.Invoke(new Action(() =>
                         {
                             log.Debug($"Already Proccessed {fileInfo.Name}");
+                        }), DispatcherPriority.ContextIdle);
+
+                        Values.Singleton.MainThreadDispatcher.Invoke(new Action(() =>
+                        {
+                            Values.Singleton.ProcessingOverlayText.Text = $"Already Proccessed {fileInfo.Name}";
                         }), DispatcherPriority.ContextIdle);
                     }
                     bool should_add = true;

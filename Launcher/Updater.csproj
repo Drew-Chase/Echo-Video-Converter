@@ -7,7 +7,7 @@
     <ProjectGuid>{34F52677-2A1B-4544-BA4B-84B6E8FB8483}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Launcher</RootNamespace>
-    <AssemblyName>Echo Video Converter Launcher</AssemblyName>
+    <AssemblyName>Echo Video Converter</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,7 +53,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Echo - Video Converter.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
@@ -74,8 +75,8 @@
     <Reference Include="CLConfiguration, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ChaseLabs.Configuration.0.0.4\lib\netstandard2.0\CLConfiguration.dll</HintPath>
     </Reference>
-    <Reference Include="CLUpdate, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ChaseLabs.Updater.0.1.5\lib\netstandard2.0\CLUpdate.dll</HintPath>
+    <Reference Include="CLUpdate, Version=0.1.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ChaseLabs.Updater.0.1.6\lib\netstandard2.0\CLUpdate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -174,9 +175,9 @@
     <Resource Include="Images\Echo-Blob-Logo.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Echo - Video Converter.ico">
+    <Content Include="Echo - Video Converter.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Echo Video Converter Banner.png" />

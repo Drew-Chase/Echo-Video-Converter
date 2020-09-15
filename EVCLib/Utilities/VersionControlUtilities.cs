@@ -1,13 +1,8 @@
 ﻿using ChaseLabs.CLUpdate;
 using ChaseLabs.Echo.Video_Converter.Resources;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
@@ -44,10 +39,18 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
             if (UpdateManager.Singleton.CheckForUpdate(app_key, local_version, remote_version))
             {
                 string path = Path.Combine(Environment.GetEnvironmentVariable("TMP"), "CLUpdater", "EchoVideoConverter", "LauncherUpdater.exe");
-                using (var client = new System.Net.WebClient())
+                using (System.Net.WebClient client = new System.Net.WebClient())
                 {
-                    if (File.Exists(path)) File.Delete(path);
-                    if (!Directory.Exists(path)) Directory.CreateDirectory(Directory.GetParent(path).FullName);
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(Directory.GetParent(path).FullName);
+                    }
+
                     client.DownloadFile("https://www.dropbox.com/s/mjhgowibs1vcd3y/LauncherUpdater.exe?dl=1", path);
                     client.Dispose();
                 }
@@ -74,7 +77,10 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
             string DownloadURL = UpdateManager.Singleton.GetArchiveURL(url_key);
             string LaunchExe = UpdateManager.Singleton.GetExecutableName(exe_key);
             if (StatusLabel != null)
+            {
                 StatusLabel.Content = "Checking For Updates...";
+            }
+
             Task.Run(() =>
             {
                 try
@@ -99,7 +105,9 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                         CurrentDispatcher.Invoke(new Action(() =>
                         {
                             if (StatusLabel != null)
+                            {
                                 StatusLabel.Content = "Installing Update...";
+                            }
                         }), DispatcherPriority.Normal);
 
                         update.Unzip();
@@ -107,7 +115,9 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                         CurrentDispatcher.Invoke(new Action(() =>
                         {
                             if (StatusLabel != null)
+                            {
                                 StatusLabel.Content = "Finishing Update...";
+                            }
                         }), DispatcherPriority.Normal);
 
                         update.CleanUp();
@@ -118,7 +128,9 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                             CurrentDispatcher.Invoke(new Action(() =>
                             {
                                 if (StatusLabel != null)
+                                {
                                     StatusLabel.Content = "Launching Application...";
+                                }
                             }), DispatcherPriority.ContextIdle);
                             System.Threading.Thread.Sleep(2000);
                             update.LaunchExecutable();

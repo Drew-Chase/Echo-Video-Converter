@@ -9,9 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVCLib", "EVCLib\EVCLib.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Setup", "Setup\Setup.csproj", "{884B5A1A-0DF7-46DD-901A-6DC0949120A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LauncherUpdater", "LauncherUpdater\LauncherUpdater.csproj", "{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Launcher", "Launcher\Launcher.csproj", "{34F52677-2A1B-4544-BA4B-84B6E8FB8483}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Launcher\Updater.csproj", "{34F52677-2A1B-4544-BA4B-84B6E8FB8483}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,14 +43,6 @@ Global
 		{884B5A1A-0DF7-46DD-901A-6DC0949120A4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{884B5A1A-0DF7-46DD-901A-6DC0949120A4}.Release|x64.ActiveCfg = Release|Any CPU
 		{884B5A1A-0DF7-46DD-901A-6DC0949120A4}.Release|x64.Build.0 = Release|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Debug|x64.Build.0 = Debug|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Release|x64.ActiveCfg = Release|Any CPU
-		{4C51BB5A-CBD7-414C-8F95-B2777E8EEF8B}.Release|x64.Build.0 = Release|Any CPU
 		{34F52677-2A1B-4544-BA4B-84B6E8FB8483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34F52677-2A1B-4544-BA4B-84B6E8FB8483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34F52677-2A1B-4544-BA4B-84B6E8FB8483}.Debug|x64.ActiveCfg = Debug|Any CPU

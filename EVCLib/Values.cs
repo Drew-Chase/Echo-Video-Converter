@@ -24,11 +24,11 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
             }
         }
 
-        //public LogManger Log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        //public LogManger Log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
         public static string[] MediaExtensions => new string[] { "done", "mpegg", "mpeg", "mp4", "mkv", "m4a", "m4v", "f4v", "f4a", "m4b", "m4r", "f4b", "mov", "3gp", "3gp2", "3g2", "3gpp", "3gpp2", "ogg", "oga", "ogv", "ogx", "wmv", "wma", "flv", "avi" };
 
 
-        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
 
         protected Values()
         {
@@ -64,31 +64,17 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
         public string FormattedTime => DateTime.Now.ToString().Replace(":", "-").Replace("/", "-");
         public string UnformattedTime => DateTime.Now.ToString();
 
-        public MediaFiles mediaFiles => new MediaFiles();
+        public MediaFiles RemainingItems { get; set; }
 
-        private ScrollViewer sv = null;
-        private readonly TextBlock currentSize, originalSize;
+        public MediaFiles mediaFiles => new MediaFiles();
 
         public MediaFiles MediaFiles { get; } = new MediaFiles();
 
-        public TextBlock CurrentSize
-        {
-            get;
-            set;
-        }
+        public bool IsFetchingFiles { get; set; }
 
-        public TextBlock OriginalSize
-        {
-            get;
-            set;
-        }
+        public TextBlock ProcessingSizeInformation { get; set; }
 
-        //private string _buildVersion = "N/A";
-        //public string BuildVersion
-        //{
-        //    get => _buildVersion;
-        //    set => _buildVersion = "build v." + value;
-        //}
+        public TextBlock ProcessingOverlayText { get; set; }
 
         public string ApplicationBuildVersion
         {
@@ -118,6 +104,8 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
             }
         }
 
+        public System.Windows.Threading.Dispatcher MainThreadDispatcher { get; set; }
+
         public string InstallationFolder => Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName;
 
         private string rootlocation = "";
@@ -126,7 +114,9 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
             get
             {
                 if (rootlocation == "")
+                {
                     RootLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                }
 
                 return rootlocation;
             }
@@ -183,6 +173,25 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
                 return dir;
             }
         }
+
+        public string GetSafeString(string value)
+        {
+            char[] invalid = "1234567890!@#$%^&*()~`\"':;{}[]\\|/?<>,.-".ToCharArray();
+            foreach (var s in invalid)
+            {
+                value = value.Replace("" + s, "");
+            }
+            return value.Replace(" ", "_");
+        }
+
+        public int GetDynamicFontSize(string value, double width)
+        {
+            int font = (int)((value.Length / width) + 5);
+            log.Info($"Font Size = {font}", $"String Length = {value.Length}", $"Width = {width}");
+            if (double.IsNaN(width)) return 12;
+            return font;
+        }
+
 
     }
 

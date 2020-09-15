@@ -17,7 +17,7 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
 
     public class MediaFiles : List<MediaFile>
     {
-        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
 
         public static string SortTypeToString(SortType value)
         {
@@ -79,9 +79,9 @@ namespace ChaseLabs.Echo.Video_Converter.Resources
             return SortOrder.Ascending;
         }
 
-        public List<MediaFile> Get(SortType type, SortOrder order)
+        public MediaFiles Get(SortType type, SortOrder order)
         {
-            List<MediaFile> files = this;
+            MediaFiles files = this;
             if (type == SortType.Alphabetical)
             {
                 if (order == SortOrder.Descending)

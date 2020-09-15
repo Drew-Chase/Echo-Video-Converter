@@ -11,7 +11,7 @@
         Background="#262626"
         Foreground="White"
         mc:Ignorable="d"
-        Title="SyncHole Launcher" Height="625" Width="450">
+        Title="Echo Video Converter Updater" Height="625" Width="450">
     <Grid>
         <Button Name="ExitBtn" Content="X" HorizontalAlignment="Right" VerticalAlignment="Top" Width="40" Height="40" Background="Transparent" BorderThickness="0" Foreground="White" FontSize="14" />
         <StackPanel>

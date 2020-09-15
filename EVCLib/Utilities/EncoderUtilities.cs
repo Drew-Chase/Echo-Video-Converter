@@ -4,7 +4,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace ChaseLabs.Echo.Video_Converter.Utilities
@@ -12,8 +11,8 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
 
     public class EncoderUtilities
     {
-        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).EnableDefaultConsoleLogging().SetMinLogType(Lists.LogTypes.All);
-        private Dispatcher dis = Dispatcher.CurrentDispatcher;
+        private static readonly CLLogger.Interfaces.ILog log = LogManger.Init().SetLogDirectory(Values.Singleton.LogFileLocation).SetMinimumLogType(Lists.LogTypes.All);
+        private readonly Dispatcher dis = Dispatcher.CurrentDispatcher;
         private string currentDirectory;
         public Process process;
         public bool HasAborted = true;
@@ -82,7 +81,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
 
                 dis.Invoke(new Action(() =>
                 {
-                    Values.Singleton.OriginalSize.Text = $"Original Size: {FileUtilities.AdjustedFileSize(file)}";
+                    //Values.Singleton.OriginalSize.Text = $"Original Size: {FileUtilities.AdjustedFileSize(file)}";
                     Values.Singleton.OriginalSizeString = FileUtilities.AdjustedFileSize(file);
                 }), DispatcherPriority.ContextIdle);
 
@@ -181,16 +180,18 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                                 Abort(true, $"Encoded File Size is larger than the original file. Moving on...");
                             }
 
-                            dis.Invoke(new Action(() =>
+                            Values.Singleton.MainThreadDispatcher.Invoke(new Action(() =>
                             {
                                 try
                                 {
-                                    Values.Singleton.CurrentSize.Text = $"Current Size: {FileUtilities.AdjustedFileSize(encoding_file)}";
                                     Values.Singleton.CurrentSizeString = FileUtilities.AdjustedFileSize(encoding_file);
+                                    if (Values.Singleton.ProcessingSizeInformation != null)
+                                        Values.Singleton.ProcessingSizeInformation.Text = $"{FileUtilities.AdjustedFileSize(encoding_file)} / {FileUtilities.AdjustedFileSize(file)}";
+                                    //Values.Singleton.CurrentSize.Text = $"Current Size: {FileUtilities.AdjustedFileSize(encoding_file)}";
                                 }
                                 catch (Exception e)
                                 {
-                                    log.Error("Failed to Retrieve the Encoding File Data", e);
+                                    //log.Error("Failed to Retrieve the Encoding File Data", e);
                                 }
                             }), DispatcherPriority.ContextIdle);
                         }
@@ -252,8 +253,8 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                             log.Info("Encode Sucessful");
                             log.Info("You save " + FileUtilities.AdjustedFileSize(difference) + "!");
                             log.Debug($"File Size Reduced by {percentage}");
-                            Values.Singleton.CurrentSize.Text = "Finished!";
-                            Values.Singleton.OriginalSize.Text = $"File Size Reduced by {percentage}";
+                            //Values.Singleton.CurrentSize.Text = "Finished!";
+                            //Values.Singleton.OriginalSize.Text = $"File Size Reduced by {percentage}";
                         }), DispatcherPriority.ContextIdle);
                         if (Values.Singleton.OverwriteOriginal)
                         {
@@ -298,7 +299,10 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
                     }), DispatcherPriority.ContextIdle);
                     File.Delete(encoding_file);
                     if (Values.Singleton.IsNetworkPath)
+                    {
                         File.Delete(file);
+                    }
+
                     dis.Invoke(new Action(() =>
                     {
                         log.Info("Restoring Original.");
@@ -329,7 +333,9 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
             {
                 HasAborted = true;
                 if (process != null)
+                {
                     process.Kill();
+                }
 
                 if (safe_abort)
                 {

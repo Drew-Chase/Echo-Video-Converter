@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Untitled Horror Game Launcher")]
+[assembly: AssemblyTitle("Echo Video Converter Launcher")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Chase Labs")]
-[assembly: AssemblyProduct("Untitled Horror Game Launcher")]
+[assembly: AssemblyProduct("Echo Video Converter")]
 [assembly: AssemblyCopyright("Copyright © Chase Labs -  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

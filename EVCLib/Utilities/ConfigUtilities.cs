@@ -1,6 +1,5 @@
 ﻿using ChaseLabs.CLConfiguration.List;
 using ChaseLabs.Echo.Video_Converter.Resources;
-using System.IO;
 
 namespace ChaseLabs.Echo.Video_Converter.Utilities
 {
@@ -39,7 +38,7 @@ namespace ChaseLabs.Echo.Video_Converter.Utilities
 
         }
 
-        void CheckDefaults()
+        private void CheckDefaults()
         {
             if (Manager.GetConfigByKey("FFMPEG File Path").Value == "")
             {
